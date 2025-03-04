@@ -2,45 +2,82 @@
 from typing import List
 
 
+# class Solution:
+#     def threeSum(self, nums: List[int]) -> List[List[int]]:
+#         # Use three pointers. one static, two dynamic
+#         sorted_list = sorted(nums)
+#         last_list = []
+#         result = []
+
+#         for i in range(len(sorted_list) - 2):
+#             left = i+1
+#             right = len(sorted_list) - 1
+
+#             if sorted_list[i] > 0:
+#                 break
+
+#             if i > 0 and sorted_list[i] == sorted_list[i-1]:
+#                 continue
+
+#             while left < right:
+#                 current_list = [sorted_list[i], sorted_list[left], sorted_list[right]]
+#                 total_sum = sum(current_list)
+
+#                 if (left > i + 1) and sorted_list[left] == sorted_list[left-1]:
+#                     left += 1
+#                     continue
+
+#                 if sum([sorted_list[i], sorted_list[left]]) > 0:
+#                     break
+
+#                 elif total_sum == 0 and current_list != last_list:
+#                     last_list = current_list
+#                     result.append(current_list)
+#                     left += 1
+#                     right -= 1
+
+#                 elif total_sum > 0:
+#                     right -= 1
+
+#                 else:
+#                     left += 1
+
+#         return result
+
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
         # Use three pointers. one static, two dynamic
-        sorted_list = sorted(nums)
-        last_list = []
+        cached_vals = set()
         result = []
 
-        for i in range(len(sorted_list) - 2):
+        for i in range(len(nums) - 2):
             left = i+1
-            right = len(sorted_list) - 1
+            right = len(nums) - 1
 
-            if sorted_list[i] > 0:
-                break
-
-            if i > 0 and sorted_list[i] == sorted_list[i-1]:
+            if nums[i] in cached_vals:
                 continue
 
-            while left < right:
-                current_list = [sorted_list[i], sorted_list[left], sorted_list[right]]
-                total_sum = sum(current_list)
+            cached_vals.add(nums[i])
 
-                if (left > i + 1) and sorted_list[left] == sorted_list[left-1]:
-                    left += 1
+            cached_num = set()
+            while left < right:
+                if nums[right] in cached_num:
+                    right -= 1
                     continue
 
-                if sum([sorted_list[i], sorted_list[left]]) > 0:
-                    break
+                cached_num.add(nums[right])
+                current_list = [nums[i], nums[left], nums[right]]
+                total_sum = sum(current_list)
 
-                elif total_sum == 0 and current_list != last_list:
-                    last_list = current_list
+                if total_sum == 0:
                     result.append(current_list)
-                    left += 1
-                    right -= 1
 
-                elif total_sum > 0:
-                    right -= 1
+                right -= 1
 
-                else:
-                    left += 1
+            print("-------------------------")
+            print(result)
+            print("-------------------------")
+
 
         return result
 
