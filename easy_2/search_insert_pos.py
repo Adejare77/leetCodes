@@ -21,15 +21,15 @@ class Solution:
         return mid if mid == left else mid + 1
 
 
-# nums = [1, 3, 5, 6]
-# target = 5
+nums = [1, 3, 5, 6]
+target = 5
 
-# print(Solution().searchInsert(nums, target))
+print(Solution().searchInsert(nums, target))
 
-# nums = [1, 3, 5, 6]
-# target = 2
+nums = [1, 3, 5, 6]
+target = 2
 
-# print(Solution().searchInsert(nums, target))
+print(Solution().searchInsert(nums, target))
 
 nums = [1, 3, 5, 6]
 target = 7
